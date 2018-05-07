@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Pizzeria Bellissimo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="script/jQ_3.js"></script>
+		<link rel="stylesheet" href="css/bootStrap4.css">
+		<script src="script/bootstrap4_JS.js"></script>
+		<script src="script/main.js"></script>
+    </head>
+    <body>
+	
+	<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Меню</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Акции</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Контакты</a>
+			</li>
+		</ul>
+	</nav>
+	
+	<div class="container-fluid">
+        <header class="row">
+			<div class="col-sm-3 text-left">
+				<h2>Pizzeria BELLISSIMO</h2>
+			</div>
+		</header>
+		<div class="row row-flex">
+            <div class="col-sm-3 text-center menu">
+                <form action="" id="addressForm" onsubmit="return false">
+					<h3>Введите Ваши данные:</h3>
+					<div>
+					Фамилия и имя:
+					</div>
+	                    <input type="text" class="margin" name="client_name">
+				    <div>
+				    Номер телефона:
+					</div>
+						<input type="tel" class="margin" name="client_number">
+					<div>
+				    Адрес доставки:
+					</div>
+						<input type="text" class="margin" name="client_location"></input><br>
+					<button id="button" class="btn margin" type="submit" value="Send"">Заказать</button>
+				</form>
+			</div>
+			<div class="col-sm-9 text-center">
+				<div class="col-sm-12" id="pizzaSelection">
+						<h3>Выберите размер пиццы:</h3><br>
+						<div id="imageContainer">
+						<img id="pizza" src="img/big_pizza.png" alt="Выбор размера пиццы">
+						</div>
+						<br><br>
+						<div class="button_group">
+							<button class="btn-lg" id="small">(32 см) 40 грн</button>
+							<button class="btn-lg" id="medium">(54 см) 65 грн</button>
+							<button class="btn-lg" id="big">(85 см) 80 грн</button>
+						</div>
+						<br><br><br>
+						<div class="col-sm-3 text-left hide" id="filling">
+						<h3>Добавки (грн):</h3>
+							<label class="ingredients">Грибы (10)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients">Ананас (15)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients ">Сыр (10)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients">Помидоры (15)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients">Оливки (15)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients">Каперсы (20)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+							<label class="ingredients">Свинина (20)
+								<input type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="hide margin">СУММА (грн):
+						<p id="totalPrice"></p>
+						<img id="bonus" src="img/cola.png" alt="<Бонус">
+						</div>
+						<br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+        <footer class="row">
+            <h3>&copy; 2018 Bellissimo</h3>
+        </footer>
+
+    </body>
+</html>
