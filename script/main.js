@@ -1,20 +1,32 @@
 $(window).on("load", function() {
     
-	let buttonGroup = $(".button_group"),
+let buttonGroup = $(".button_group"),
 	hideElem = $(".hide"),
 	pizzaImg = $("#pizza"),
 	bonusImg = $("#bonus"),
 	pizzaSelection = $("#pizzaSelection"),
 	addressForm = $("#addressForm"),
-	submitButton = $("#button")
-	PizzaFilling = $(".ingredients"),
+	submitButton = $("#button"),
+	resetButton = $("#reset"),
+	pizzaFillings = $("input[type=checkbox]"),
 	filling = $("#filling"),
+	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
 	pizzaFillingPrice = 0,
 	pizzaSizePrice = 0,
 	pizzaPrice = 0,
-	pizzaSizePrices = [40, 65, 80],
-	pizzaFillingPrices = [10, 15, 10, 15, 15, 20, 20];
+	pizzaSizePrices = Object.create(null),
+	pizzaFillingPrices = Object.create(null);
+	pizzaSizePrices["small"] = 40,
+	pizzaSizePrices["medium"] = 65,
+	pizzaSizePrices["big"] = 80;
+	pizzaFillingPrices["mushrooms"] = 10,
+	pizzaFillingPrices["pineapple"] = 15,
+	pizzaFillingPrices["cheeze"] = 10,
+	pizzaFillingPrices["tomato"] = 15,
+	pizzaFillingPrices["olives"] = 15,
+	pizzaFillingPrices["capers"] = 20,
+	pizzaFillingPrices["meat"] = 20;
 	
 	//
 	hideElem.hide();
@@ -26,18 +38,18 @@ $(window).on("load", function() {
 		let selectedButton = event.target.id;
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
-				pizzaSizePrice = pizzaSizePrices[0];
+				pizzaSizePrice = pizzaSizePrices.small;
 			}
 				if (selectedButton == "medium") {
 					pizzaImg.animate({"width": "70px", "transitionDuration": "0.7s"});
-					pizzaSizePrice = pizzaSizePrices[1];
+					pizzaSizePrice = pizzaSizePrices.medium;
 				}
 					if (selectedButton == "big") {
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
-						pizzaSizePrice = pizzaSizePrices[2];
+						pizzaSizePrice = pizzaSizePrices.big;
 					}
 					hideElem.show("fast");
-					calculateTotal();
+					console.log("pizzaSizePrice " + pizzaSizePrice);
 					submitButton.prop("disabled", false);
 					event.stopPropagation();
 	});
@@ -45,13 +57,32 @@ $(window).on("load", function() {
 	//Присваивание цен добавкам
 		filling.on("click", function(event) {
 			let selectedFilling = event.target.className;
-			if (selectedFilling = "ingredients") {
-				for (var i = 0, fillingLenght = PizzaFilling.length; i < fillingLenght; i++) {
-					if (PizzaFilling[i].checked) {
-						pizzaFillingPrice += pizzaFillingPrices[i];
+			if (selectedFilling == "ingredients") {
+				for (let i = 0; i < fillingLenght; i++) {
+					if (pizzaFillings[i].checked == true) {
+						for (f in pizzaFillingPrices) {
+							pizzaFillingPrice += pizzaFillingPrices[f];
+						}
 					}
 				}
-			calculateTotal();
+			
+			console.log("pizzaFillingPrice " + pizzaFillingPrice);
+			}
+		event.stopPropagation();
+		});
+	
+	//Сброс значений для пиццы
+	resetButton.on("click", function(event) {
+			let selectedButton = event.target.id;
+			if (selectedButton == "reset") {
+				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
+				pizzaSizePrice = 0;
+				pizzaFillingPrice = 0;
+				for (let i = 0; i < fillingLenght; i++) {
+					pizzaFillings.prop("checked", false);
+				}
+				submitButton.prop("disabled", true);
+				console.log("pizzaSizePrice " + pizzaSizePrice);
 			}
 		event.stopPropagation();
 		});
@@ -60,7 +91,6 @@ $(window).on("load", function() {
 	function calculateTotal() {
 		pizzaPrice = pizzaFillingPrice + pizzaSizePrice;
 		totalCost.innerHTML = pizzaPrice;
-		console.log(totalCost.innerHTML);
 		if (pizzaPrice > 200) {
 			totalCost.innerHTML += 0.99 + " +";
 			bonusImg.show("fast");

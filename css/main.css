@@ -63,12 +63,30 @@ header {
 	border-radius: 5px;
 	cursor: pointer;
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	outline: none;
 }
 
 #button:active {
 	top: 1px;
-	outline: none;
 	box-shadow: none;
+	outline: none;
+}
+
+#reset {
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+	background: #0dhf0f;
+	border: 0;
+	border-bottom: 2px solid #e2b607;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	outline: none;
+}
+
+#reset:active {
+	top: 1px;
+	box-shadow: none;
+	outline: none;
 }
 
 section {
