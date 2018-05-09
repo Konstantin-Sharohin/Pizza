@@ -8,25 +8,25 @@ let buttonGroup = $(".button_group"),
 	addressForm = $("#addressForm"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
-	pizzaFillings = $("input[type=checkbox]"),
+	pizzaFillings = $("input[name=ingredient]"),
 	filling = $("#filling"),
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
 	pizzaFillingPrice = 0,
 	pizzaSizePrice = 0,
 	pizzaPrice = 0,
-	pizzaSizePrices = Object.create(null),
-	pizzaFillingPrices = Object.create(null);
+	pizzaSizePrices = Object.create(null);
+	// pizzaFillingPrices = Object.create(null);
 	pizzaSizePrices["small"] = 40,
 	pizzaSizePrices["medium"] = 65,
 	pizzaSizePrices["big"] = 80;
-	pizzaFillingPrices["mushrooms"] = 10,
-	pizzaFillingPrices["pineapple"] = 15,
-	pizzaFillingPrices["cheeze"] = 10,
-	pizzaFillingPrices["tomato"] = 15,
-	pizzaFillingPrices["olives"] = 15,
-	pizzaFillingPrices["capers"] = 20,
-	pizzaFillingPrices["meat"] = 20;
+	// pizzaFillingPrices["mushrooms"] = 10,
+	// pizzaFillingPrices["pineapple"] = 15,
+	// pizzaFillingPrices["cheeze"] = 10,
+	// pizzaFillingPrices["tomato"] = 15,
+	// pizzaFillingPrices["olives"] = 15,
+	// pizzaFillingPrices["capers"] = 20,
+	// pizzaFillingPrices["meat"] = 20;
 	
 	//
 	hideElem.hide();
@@ -55,19 +55,16 @@ let buttonGroup = $(".button_group"),
 	});
 	
 	//Присваивание цен добавкам
-		filling.on("click", function(event) {
+		filling.on("change", function(event) {
 			let selectedFilling = event.target.className;
-			if (selectedFilling == "ingredients") {
+			if (selectedFilling.toLowerCase() == "ingredients") {
 				for (let i = 0; i < fillingLenght; i++) {
-					if (pizzaFillings[i].checked == true) {
-						for (f in pizzaFillingPrices) {
-							pizzaFillingPrice += pizzaFillingPrices[f];
+					if (pizzaFillings[i].checked) {
+						pizzaFillingPrice += parseInt(pizzaFillings[i].value);
 						}
 					}
 				}
-			
-			console.log("pizzaFillingPrice " + pizzaFillingPrice);
-			}
+		console.log("pizzaFillingPrice " + pizzaFillingPrice);
 		event.stopPropagation();
 		});
 	
@@ -88,15 +85,15 @@ let buttonGroup = $(".button_group"),
 		});
 	
 	//Подсчет итоговой суммы
-	function calculateTotal() {
-		pizzaPrice = pizzaFillingPrice + pizzaSizePrice;
-		totalCost.innerHTML = pizzaPrice;
-		if (pizzaPrice > 200) {
-			totalCost.innerHTML += 0.99 + " +";
-			bonusImg.show("fast");
-		};
-		if (pizzaPrice < 200) {
-			bonusImg.hide("fast");
-		}
-	}
+	// function calculateTotal() {
+		// pizzaPrice = pizzaFillingPrice + pizzaSizePrice;
+		// totalCost.innerHTML = pizzaPrice;
+		// if (pizzaPrice > 200) {
+			// totalCost.innerHTML += 0.99 + " +";
+			// bonusImg.show("fast");
+		// };
+		// if (pizzaPrice < 200) {
+			// bonusImg.hide("fast");
+		// }
+	// }
 });
