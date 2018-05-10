@@ -25,7 +25,7 @@ let buttonGroup = $(".button_group"),
 	bonusImg.hide();
 	submitButton.prop("disabled", true);
 	
-	//Создание обработчика событий для обтекающего элемента и присваивание цен
+	//Создание обработчика событий для обтекающего элемента
 	pizzaSelection.on("click", function(event) {
 		let selectedButton = event.target.id;
 			if (selectedButton == "small") {
@@ -40,17 +40,21 @@ let buttonGroup = $(".button_group"),
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
 						pizzaSizePrice = pizzaSizePrices.big;
 					}
-		hideElem.show("fast");
-		submitButton.prop("disabled", false);
-	//
-		let pizzaFillingPrice = 0;
-		$("input:checkbox:checked").each(function() {
-			pizzaFillingPrice += parseInt($(this).val());
-			});
-		
-		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
-		event.stopPropagation();
+					hideElem.show("fast");
+					console.log("pizzaSizePrice " + pizzaSizePrice);
+					submitButton.prop("disabled", false);
+					calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+					event.stopPropagation();
 	});
+	
+	//Присваивание цен добавкам
+		pizzaFillings.on("change", function(event) {
+			let pizzaFillingPrice = 0;
+			$("input:checkbox:checked").each(function() {
+				pizzaFillingPrice += parseInt($(this).val());
+			});
+			calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+		});
 	
 	//Сброс выбора пиццы
 	resetButton.on("click", function(event) {
