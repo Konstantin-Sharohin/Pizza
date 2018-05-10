@@ -40,26 +40,26 @@
 					<div>
 					Фамилия и имя:
 					</div>
-	                    <input type="text" class="margin" name="client_name">
+	                    <input type="text" class="margin" name="client_name" required autofocus>
 				    <div>
 				    Номер телефона:
 					</div>
-						<input type="tel" class="margin" name="client_number">
+						<input type="tel" class="margin" name="client_number" required>
 					<div>
 				    Адрес доставки:
 					</div>
-						<input type="text" class="margin" name="client_location"></input><br>
+						<input type="text" class="margin" name="client_location" required></input><br>
 					<button id="button" class="btn margin" type="submit" value="Send"">Заказать</button>
 				</form>
 			</div>
 			<div class="col-sm-9 text-center">
-				<div class="col-sm-12"><br>
+				<div class="col-sm-12" id="pizzaSelection"><br>
 						<h3>Выберите размер пиццы:</h3><br>
 						<div id="imageContainer">
 						<img id="pizza" src="img/big_pizza.png" alt="Выбор размера пиццы">
 						</div>
 						<br><br>
-						<div class="button_group" id="pizzaSelection">
+						<div class="button_group">
 							<button class="btn-lg" id="small">(32 см) 40 грн</button>
 							<button class="btn-lg" id="medium">(54 см) 65 грн</button>
 							<button class="btn-lg" id="big">(85 см) 80 грн</button>
