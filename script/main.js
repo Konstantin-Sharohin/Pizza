@@ -9,6 +9,7 @@ let buttonGroup = $(".button_group"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
+	pizzaFillingPrice = 0,
 	filling = $("#filling"),
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
@@ -42,16 +43,17 @@ let buttonGroup = $(".button_group"),
 					hideElem.show("fast");
 					console.log("pizzaSizePrice " + pizzaSizePrice);
 					submitButton.prop("disabled", false);
+					calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 					event.stopPropagation();
 	});
 	
 	//Присваивание цен добавкам
-		pizzaFillings.change(function() {
+		pizzaFillings.on("change", function(event) {
+			let pizzaFillingPrice = 0;
 			$("input:checkbox:checked").each(function() {
-				let pizzaFillingPrice = 0;
 				pizzaFillingPrice += parseInt($(this).val());
-				console.log("pizzaFillingPrice " + pizzaFillingPrice);
 			});
+			calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 		});
 	
 	//Сброс выбора пиццы
@@ -66,22 +68,22 @@ let buttonGroup = $(".button_group"),
 				}
 				hideElem.hide("slow");
 				submitButton.prop("disabled", true);
-				console.log("pizzaSizePrice " + pizzaSizePrice);
-				console.log(" pizzaFillingPrice" + pizzaFillingPrice);
 			}
 		event.stopPropagation();
 		});
 	
 	//Подсчет итоговой суммы
-	// function calculateTotal() {
-		// pizzaPrice = pizzaFillingPrice + pizzaSizePrice;
-		// totalCost.innerHTML = pizzaPrice;
-		// if (pizzaPrice > 200) {
-			// totalCost.innerHTML += 0.99 + " +";
-			// bonusImg.show("fast");
-		// };
-		// if (pizzaPrice < 200) {
-			// bonusImg.hide("fast");
-		// }
-	// }
+	function calculateTotal(pizzaSizePrice, pizzaFillingPrice) {
+		pizzaPrice = pizzaSizePrice + pizzaFillingPrice;
+		totalCost.empty();
+		totalCost.append(pizzaPrice);
+		if (pizzaPrice > 120) {
+			totalCost.empty();
+			totalCost.append(pizzaPrice + 0.99 + " + ");
+			bonusImg.show("fast");
+		};
+		if (pizzaPrice < 120) {
+			bonusImg.hide("fast");
+		}
+	}
 });

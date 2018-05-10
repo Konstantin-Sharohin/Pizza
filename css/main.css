@@ -17,6 +17,12 @@ header {
     background-repeat: no-repeat;
 }
 
+.nav-link:hover {
+	background-color: #f4df41;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
 .row-flex {
     display: flex;
     flex-flow: row wrap;
