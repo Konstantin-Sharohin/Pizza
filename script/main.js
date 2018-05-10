@@ -8,25 +8,16 @@ let buttonGroup = $(".button_group"),
 	addressForm = $("#addressForm"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
-	pizzaFillings = $("input[name=ingredient]"),
+	pizzaFillings = $("input:checkbox"),
 	filling = $("#filling"),
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
-	pizzaFillingPrice = 0,
 	pizzaSizePrice = 0,
 	pizzaPrice = 0,
 	pizzaSizePrices = Object.create(null);
-	// pizzaFillingPrices = Object.create(null);
 	pizzaSizePrices["small"] = 40,
 	pizzaSizePrices["medium"] = 65,
 	pizzaSizePrices["big"] = 80;
-	// pizzaFillingPrices["mushrooms"] = 10,
-	// pizzaFillingPrices["pineapple"] = 15,
-	// pizzaFillingPrices["cheeze"] = 10,
-	// pizzaFillingPrices["tomato"] = 15,
-	// pizzaFillingPrices["olives"] = 15,
-	// pizzaFillingPrices["capers"] = 20,
-	// pizzaFillingPrices["meat"] = 20;
 	
 	//
 	hideElem.hide();
@@ -55,20 +46,15 @@ let buttonGroup = $(".button_group"),
 	});
 	
 	//Присваивание цен добавкам
-		filling.on("change", function(event) {
-			let selectedFilling = event.target.className;
-			if (selectedFilling.toLowerCase() == "ingredients") {
-				for (let i = 0; i < fillingLenght; i++) {
-					if (pizzaFillings[i].checked) {
-						pizzaFillingPrice += parseInt(pizzaFillings[i].value);
-						}
-					}
-				}
-		console.log("pizzaFillingPrice " + pizzaFillingPrice);
-		event.stopPropagation();
+		pizzaFillings.change(function() {
+			$("input:checkbox:checked").each(function() {
+				let pizzaFillingPrice = 0;
+				pizzaFillingPrice += parseInt($(this).val());
+				console.log("pizzaFillingPrice " + pizzaFillingPrice);
+			});
 		});
 	
-	//Сброс значений для пиццы
+	//Сброс выбора пиццы
 	resetButton.on("click", function(event) {
 			let selectedButton = event.target.id;
 			if (selectedButton == "reset") {
@@ -78,8 +64,10 @@ let buttonGroup = $(".button_group"),
 				for (let i = 0; i < fillingLenght; i++) {
 					pizzaFillings.prop("checked", false);
 				}
+				hideElem.hide("slow");
 				submitButton.prop("disabled", true);
 				console.log("pizzaSizePrice " + pizzaSizePrice);
+				console.log(" pizzaFillingPrice" + pizzaFillingPrice);
 			}
 		event.stopPropagation();
 		});
