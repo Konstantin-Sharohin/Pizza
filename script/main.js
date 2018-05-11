@@ -78,7 +78,7 @@ let buttonGroup = $(".button_group"),
 		pizzaPrice = pizzaSizePrice + pizzaFillingPrice;
 		totalCost.empty();
 		totalCost.append(pizzaPrice);
-		if (pizzaPrice > 120) {
+		if (pizzaPrice >=+ 120) {
 			totalCost.empty();
 			totalCost.append(pizzaPrice + 0.99 + " + ");
 			bonusImg.show("fast");
@@ -87,4 +87,6 @@ let buttonGroup = $(".button_group"),
 			bonusImg.hide("slow");
 		}
 	}
+	
+	//pattern: "[\w',-\\/.\s]"
 });

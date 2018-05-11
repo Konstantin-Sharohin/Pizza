@@ -4,7 +4,6 @@
         <title>Pizzeria Bellissimo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="script/jQ_3.js"></script>
 		<link rel="stylesheet" href="css/bootStrap4.css">
@@ -35,18 +34,17 @@
 		</header>
 		<div class="row row-flex">
             <div class="col-sm-3 text-center menu">
-                <form action="#" id="addressForm">
-					<fieldset>
-					<legend>Введите Ваши данные:</legend>
+                <form id="addressForm" action="" method="post"></form>
+					<h3>Введите Ваши данные:</h3>
 					<div>Фамилия и имя:</div>
-	                    <input type="text" class="margin" name="client_name" required autofocus>
+	                    <input type="text" class="margin" name="client_name" form="addressForm" required autofocus></input>
 				    <div>Номер телефона:</div>
-						<input type="tel" class="margin" name="client_number" required>
+						<input type="tel" class="margin" name="client_number" form="addressForm" placeholder="(***)***-**-**" required></input>
 					<div>Адрес доставки:</div>
-						<input type="text" class="margin" name="client_location" required></input><br>
-					<button id="button" class="btn margin" type="submit" value="Send">Заказать</button>
-					</fieldset>
-				</form>
+						<input class="margin" name="client_location" form="addressForm" placeholder="Город, улица, дом" required></input>
+						<br>
+						<button type="submit" id="button" form="addressForm" class="btn margin" value="Send">Заказать</button>
+				
 			</div>
 			<div class="col-sm-9 text-center">
 				<div class="col-sm-12" id="pizzaSelection"><br>
@@ -56,47 +54,50 @@
 						</div>
 						<br><br>
 						<div class="button_group">
-							<button class="btn-lg" id="small">(32 см) 40 грн</button>
-							<button class="btn-lg" id="medium">(54 см) 65 грн</button>
-							<button class="btn-lg" id="big">(85 см) 80 грн</button>
+							<button type="button" class="btn" id="small" name="small" form="addressForm">(32 см) 40 грн</button>
+							<button type="button" class="btn" id="medium" name="medium" form="addressForm">(54 см) 65 грн</button>
+							<button type="button" class="btn" id="big" name="big" form="addressForm">(85 см) 80 грн</button>
 						</div>
 						<br><br><br>
 						<div class="col-sm-3 text-left hide" id="filling">
-						<h3>Добавки (грн):</h3>
+						<h4>Добавки (грн):</h4>
 							<label class="ingredients">Грибы (10)
-								<input type="checkbox" name="mushrooms" value="10">
+								<input type="checkbox" name="mushrooms" value="10" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients">Ананас (15)
-								<input type="checkbox" name="pineapple" value="15">
+								<input type="checkbox" name="pineapple" value="15" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients ">Сыр (10)
-								<input type="checkbox" name="cheeze" value="10">
+								<input type="checkbox" name="cheeze" value="10" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients">Помидоры (15)
-								<input type="checkbox" name="tomatoes" value="15">
+								<input type="checkbox" name="tomatoes" value="15" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients">Оливки (15)
-								<input type="checkbox" name="olives" value="15">
+								<input type="checkbox" name="olives" value="15" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients">Каперсы (20)
-								<input type="checkbox" name="capers" value="20">
+								<input type="checkbox" name="capers" value="20" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<label class="ingredients">Свинина (20)
-								<input type="checkbox" name="pork" value="20">
+								<input type="checkbox" name="pork" value="20" form="addressForm">
 								<span class="checkmark"></span>
 							</label>
 							<br>
 							<button class="btn-sm" id="reset">Сбросить</button>
+						</div><br>
+						<div class="row justify-content-center">
+						<div class="col-sm-4 text-center hide total">
+							СУММА (грн):
+							<span id="totalPrice"></span>
+							<img id="bonus" src="img/cola.png" alt="<Бонус">
 						</div>
-						<div class="hide margin">СУММА (грн):
-						<span id="totalPrice"></span>
-						<img id="bonus" src="img/cola.png" alt="<Бонус">
 						</div>
 						<br>
 				</div>
