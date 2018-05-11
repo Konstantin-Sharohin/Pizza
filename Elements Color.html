@@ -35,21 +35,17 @@
 		</header>
 		<div class="row row-flex">
             <div class="col-sm-3 text-center menu">
-                <form action="" id="addressForm" onsubmit="return false">
-					<h3>Введите Ваши данные:</h3>
-					<div>
-					Фамилия и имя:
-					</div>
+                <form action="#" id="addressForm">
+					<fieldset>
+					<legend>Введите Ваши данные:</legend>
+					<div>Фамилия и имя:</div>
 	                    <input type="text" class="margin" name="client_name" required autofocus>
-				    <div>
-				    Номер телефона:
-					</div>
+				    <div>Номер телефона:</div>
 						<input type="tel" class="margin" name="client_number" required>
-					<div>
-				    Адрес доставки:
-					</div>
+					<div>Адрес доставки:</div>
 						<input type="text" class="margin" name="client_location" required></input><br>
-					<button id="button" class="btn margin" type="submit" value="Send"">Заказать</button>
+					<button id="button" class="btn margin" type="submit" value="Send">Заказать</button>
+					</fieldset>
 				</form>
 			</div>
 			<div class="col-sm-9 text-center">
