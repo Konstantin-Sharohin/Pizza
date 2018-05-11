@@ -27,21 +27,26 @@ let buttonGroup = $(".button_group"),
 	
 	//Создание обработчика событий для обтекающего элемента и присваивание цен
 	pizzaSelection.on("click", function(event) {
-		let selectedButton = event.target.id;
+		let selectedButton = event.target.id; 
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
 				pizzaSizePrice = pizzaSizePrices.small;
+				hideElem.show("fast");
+				submitButton.prop("disabled", false);
 			}
 				if (selectedButton == "medium") {
 					pizzaImg.animate({"width": "70px", "transitionDuration": "0.7s"});
 					pizzaSizePrice = pizzaSizePrices.medium;
+					hideElem.show("fast");
+					submitButton.prop("disabled", false);
 				}
 					if (selectedButton == "big") {
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
 						pizzaSizePrice = pizzaSizePrices.big;
+						hideElem.show("fast");
+						submitButton.prop("disabled", false);
 					}
-					hideElem.show("fast");
-					submitButton.prop("disabled", false);
+			
 	//
 		let pizzaFillingPrice = 0;
 		$("input:checkbox:checked").each(function() {
