@@ -4,13 +4,13 @@ let buttonGroup = $(".button_group"),
 	hideElem = $(".hide"),
 	pizzaImg = $("#pizza"),
 	bonusImg = $("#bonus"),
-	pizzaSelection = $("#pizzaSelection"),
+	pizzaSelectionForm = $("#pizzaSelectionForm"),
+	fillingForm = $("#fillingForm"),
 	addressForm = $("#addressForm"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
 	pizzaFillingPrice = 0,
-	filling = $("#filling"),
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
 	pizzaSizePrice = 0,
@@ -26,7 +26,7 @@ let buttonGroup = $(".button_group"),
 	submitButton.prop("disabled", true);
 	
 	//Создание обработчика событий для обтекающего элемента и присваивание цен
-	pizzaSelection.on("click", function(event) {
+	pizzaSelectionForm.on("click", function(event) {
 		let selectedButton = event.target.id; 
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
@@ -46,8 +46,11 @@ let buttonGroup = $(".button_group"),
 						hideElem.show("fast");
 						submitButton.prop("disabled", false);
 					}
-			
-	//
+		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+	});		
+	
+	
+	fillingForm.on("click", function(event) {
 		let pizzaFillingPrice = 0;
 		$("input:checkbox:checked").each(function() {
 			pizzaFillingPrice += parseInt($(this).val());
@@ -88,11 +91,29 @@ let buttonGroup = $(".button_group"),
 		}
 	}
 	
-	addressForm.on("submit", function(e) {
-		e.preventDefault();
-		let name = addressForm.name.value;
-		/^[A-Za-z\s]+$/.test(name);
-		$.post(this.action, $(this).serialize());
+	
+	//Отправка данных форм на сервер
+	addressForm.on("submit", function(event) {
+		event.preventDefault();
+		
+		$("a.link").on("click",function(){
+         window.open('www.yourdomain.com','_blank');
+     });
+		
+		$.ajax({
+			url:     url, //url страницы (action_ajax_form.php)
+			type:     "POST", //метод отправки
+			dataType: "html", //формат данных
+			data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+			success: function(response) { //Данные отправлены успешно
+				result = $.parseJSON(response);
+				$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
+			},
+			error: function(response) { // Данные не отправлены
+				$('#result_form').html('Ошибка. Данные не отправлены.');
+			}
+		});
+	$.post(this.action, $(this).serialize());
 });
 	
 	//pattern: "[\w',-\\/.\s]"

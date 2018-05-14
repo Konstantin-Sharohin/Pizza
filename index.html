@@ -5,10 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/main.css">
-		<script src="script/jQ_3.js"></script>
 		<link rel="stylesheet" href="css/bootStrap4.css">
-		<script src="script/bootstrap4_JS.js"></script>
-		<script src="script/main.js"></script>
     </head>
     <body>
 	
@@ -32,35 +29,42 @@
 				<h1>Pizzeria BELLISSIMO</h1>
 			</div>
 		</header>
-		<div class="row row-flex">
+		<div class="row">
             <div class="col-sm-3 text-center menu">
-                <form id="addressForm" action="" method="post"></form>
-					<h3>Введите Ваши данные:</h3>
+				<form id="addressForm" action="ajax_form" method="post">
+				<h3>Введите Ваши данные:</h3>
 					<div>Фамилия и имя:</div>
 	                    <input type="text" class="margin" name="client_name" form="addressForm" maxlength="40" placeholder="Иванов Иван" required autofocus></input>
 				    <div>Номер телефона:</div>
 						<input type="tel" class="margin" name="client_number" form="addressForm" placeholder="(xxx)xxx-xx-xx" pattern="\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}" maxlength="14" required></input>
 					<div>Адрес доставки:</div>
-						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="(^[A-Z]+\,\s[A-Z]+\,\s\d+)" required></input>
+						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="[[А-Я]+\,\s[А-Я]+\,\s\d+]" required></input>
 						<br>
 						<button type="submit" id="button" form="addressForm" class="btn margin" value="Send">Заказать</button>
-				
+				</form>
 			</div>
 			<div class="col-sm-9 text-center">
-				<div class="col-sm-12" id="pizzaSelection"><br>
-						<h3>Выберите размер пиццы:</h3><br>
-						<div id="imageContainer">
-						<img id="pizza" src="img/big_pizza.png" alt="Выбор размера пиццы">
-						</div>
-						<br><br>
-						<div class="button_group">
-							<button type="button" class="btn" id="small" name="small" form="addressForm">(32 см) 40 грн</button>
-							<button type="button" class="btn" id="medium" name="medium" form="addressForm">(54 см) 65 грн</button>
-							<button type="button" class="btn" id="big" name="big" form="addressForm">(85 см) 80 грн</button>
-						</div>
-						<br><br><br>
-						<div class="col-sm-3 text-left hide" id="filling">
-						<h4>Добавки (грн):</h4>
+				<div class="row">
+					<div class="col-sm-12">
+						<form id="pizzaSelectionForm"><br>
+							<h3>Выберите размер пиццы:</h3><br>
+							<div id="imageContainer">
+								<img id="pizza" src="img/big_pizza.png" alt="Выбор размера пиццы">
+							</div>
+							<br><br>
+							<div class="button_group">
+								<button type="button" class="btn" id="small" name="small" form="addressForm">(32 см) 40 грн</button>
+								<button type="button" class="btn" id="medium" name="medium" form="addressForm">(54 см) 65 грн</button>
+								<button type="button" class="btn" id="big" name="big" form="addressForm">(85 см) 80 грн</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br><br><br>
+				<div class="row">	
+					<div class="col-sm-4 text-left hide">
+						<form id="fillingForm">
+							<h4>Добавки (грн):</h4>
 							<label class="ingredients">Грибы (10)
 								<input type="checkbox" name="mushrooms" value="10" form="addressForm">
 								<span class="checkmark"></span>
@@ -91,23 +95,29 @@
 							</label>
 							<br>
 							<button class="btn-sm" id="reset">Сбросить</button>
-						</div><br>
-						<div class="row justify-content-center">
-						<div class="col-sm-4 text-center hide total">
-							СУММА (грн):
+							</form>
+							<br>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-6 text-center hide total">
+						СУММА (грн):
 							<span id="totalPrice"></span>
 							<img id="bonus" src="img/cola.png" alt="<Бонус">
-						</div>
-						</div>
-						<br>
+					</div>
 				</div>
-			</div>
+				<br>		
+			</div>	
 		</div>
 	</div>
+	
+    <footer class="row">
+        <h3>&copy; 2018 Bellissimo</h3>
+    </footer>
 
-        <footer class="row">
-            <h3>&copy; 2018 Bellissimo</h3>
-        </footer>
-
+		<script src="script/jQ_3.js"></script>
+		<script src="script/bootstrap4_JS.js"></script>
+		<script src="script/main.js"></script>
+		
     </body>
 </html>
