@@ -7,6 +7,7 @@ let buttonGroup = $(".button_group"),
 	pizzaSelectionForm = $("#pizzaSelectionForm"),
 	fillingForm = $("#fillingForm"),
 	addressForm = $("#addressForm"),
+	showResult = $("#showResult")
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
@@ -95,25 +96,22 @@ let buttonGroup = $(".button_group"),
 	//Открытие вкладки и отправка данных форм на сервер
 	addressForm.on("submit", function(event) {
 		event.preventDefault();
-		submitButton.on("click",function() {
-         window.open('www.yourdomain.com','_blank');
-     });
-		
-		$.ajax({
-			url:     url, //url страницы (action_ajax_form.php)
-			type:     "POST", //метод отправки
-			dataType: "html", //формат данных
-			data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
-			success: function(response) { //Данные отправлены успешно
-				result = $.parseJSON(response);
-				$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
-			},
-			error: function(response) { // Данные не отправлены
-				$('#result_form').html('Ошибка. Данные не отправлены.');
-			}
-		});
-	$.post(this.action, $(this).serialize());
-});
-	
-	//pattern: "[\w',-\\/.\s]"
+		console.log($(this).serialize());
+	});
+		// function sendAjaxForm(showResult, ajax_form, url) {
+			// $.ajax({
+				// url:	ajax_form.php,
+				// type:	"POST",
+				// dataType:	"html",
+				// data: $("#" + ajax_form).serialize(),
+				// success: function(response) {
+					// result = $.parseJSON(response);
+					// showResult.html("Спасибо, заказ принят!");
+				// },
+				// error: function(response) {
+					// showResult.html("Ошибка. Данные не отправлены.");
+				// }
+			// })
+		// };
+
 });
