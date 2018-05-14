@@ -39,9 +39,9 @@
 					<div>Фамилия и имя:</div>
 	                    <input type="text" class="margin" name="client_name" form="addressForm" maxlength="40" placeholder="Иванов Иван" required autofocus></input>
 				    <div>Номер телефона:</div>
-						<input type="tel" class="margin" name="client_number" form="addressForm" placeholder="(xxx)xxx-xx-xx" pattern="(^([\d]{3})[\d]{3}-[\d]{2}-[\d]{2}" maxlength="14" required></input>
+						<input type="tel" class="margin" name="client_number" form="addressForm" placeholder="(xxx)xxx-xx-xx" pattern="\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}" maxlength="14" required></input>
 					<div>Адрес доставки:</div>
-						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="(\w)+\s(\w)+\s(\d){1,3}" required></input>
+						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="(^[A-Z]+\,\s[A-Z]+\,\s\d+)" required></input>
 						<br>
 						<button type="submit" id="button" form="addressForm" class="btn margin" value="Send">Заказать</button>
 				
