@@ -1,12 +1,11 @@
 @font-face {
-	font-family: "Amatic SC";
-	src: url("../fonts/AmaticSC-Bold.ttf");
-	font-weight: normal;
-	font-style: italic;
+	font-family: "Caveat";
+	src: url("fonts/Caveat-Bold.ttf");
+	font-weight: bold;
 }
 
 * {
-	font-family: 'Pacifico';
+	font-family: "Caveat";
 }
 
 .margin {
@@ -16,8 +15,8 @@
 header {
     padding: 50px;
     color: #ffffff;
-	letter-spacing: 3px;
-	text-shadow: 3px 2px black; 
+	letter-spacing: 4px;
+	-webkit-text-stroke: 0.5px #ffffff; 
 	background: url(../img/header-min.png);
 	background-size: cover;
 	background-position: top;

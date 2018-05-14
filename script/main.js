@@ -88,5 +88,12 @@ let buttonGroup = $(".button_group"),
 		}
 	}
 	
+	addressForm.on("submit", function(e) {
+		e.preventDefault();
+		let name = addressForm.name.value;
+		/^[A-Za-z\s]+$/.test(name);
+		$.post(this.action, $(this).serialize());
+});
+	
 	//pattern: "[\w',-\\/.\s]"
 });
