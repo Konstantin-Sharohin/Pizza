@@ -31,22 +31,20 @@
 		</header>
 		<div class="row">
             <div class="col-sm-3 text-center menu">
-				<form id="addressForm" action="ajax_form" method="post">
+				<form id="addressForm" action="ajax_form" method="post"></form>
 				<h3>Введите Ваши данные:</h3>
 					<div>Фамилия и имя:</div>
 	                    <input type="text" class="margin" name="client_name" form="addressForm" maxlength="40" placeholder="Иванов Иван" required autofocus></input>
 				    <div>Номер телефона:</div>
 						<input type="tel" class="margin" name="client_number" form="addressForm" placeholder="(xxx)xxx-xx-xx" pattern="\([\d]{3}\)[\d]{3}-[\d]{2}-[\d]{2}" maxlength="14" required></input>
 					<div>Адрес доставки:</div>
-						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="[[А-Я]+\,\s[А-Я]+\,\s\d+]" required></input>
+						<input class="margin" name="client_location" form="addressForm" placeholder="город, улица, дом" pattern="[а-яА-Я]+,\s[а-яА-Я]+,\s[\d]+" required></input>
 						<br>
 						<button type="submit" id="button" form="addressForm" class="btn margin" value="Send">Заказать</button>
-				</form>
 			</div>
 			<div class="col-sm-9 text-center">
 				<div class="row">
-					<div class="col-sm-12">
-						<form id="pizzaSelectionForm"><br>
+					<div class="col-sm-12" id="pizzaSelectionForm"><br>
 							<h3>Выберите размер пиццы:</h3><br>
 							<div id="imageContainer">
 								<img id="pizza" src="img/big_pizza.png" alt="Выбор размера пиццы">
@@ -57,13 +55,11 @@
 								<button type="button" class="btn" id="medium" name="medium" form="addressForm">(54 см) 65 грн</button>
 								<button type="button" class="btn" id="big" name="big" form="addressForm">(85 см) 80 грн</button>
 							</div>
-						</form>
 					</div>
 				</div>
 				<br><br><br>
 				<div class="row">	
-					<div class="col-sm-4 text-left hide">
-						<form id="fillingForm">
+					<div class="col-sm-4 text-left hide" id="fillingForm">
 							<h4>Добавки (грн):</h4>
 							<label class="ingredients">Грибы (10)
 								<input type="checkbox" name="mushrooms" value="10" form="addressForm">
@@ -95,7 +91,6 @@
 							</label>
 							<br>
 							<button class="btn-sm" id="reset">Сбросить</button>
-							</form>
 							<br>
 					</div>
 				</div>

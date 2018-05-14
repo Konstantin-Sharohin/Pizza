@@ -92,11 +92,10 @@ let buttonGroup = $(".button_group"),
 	}
 	
 	
-	//Отправка данных форм на сервер
+	//Открытие вкладки и отправка данных форм на сервер
 	addressForm.on("submit", function(event) {
 		event.preventDefault();
-		
-		$("a.link").on("click",function(){
+		submitButton.on("click",function() {
          window.open('www.yourdomain.com','_blank');
      });
 		
