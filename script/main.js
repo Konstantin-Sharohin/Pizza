@@ -7,6 +7,9 @@ let buttonGroup = $(".button_group"),
 	pizzaSelectionForm = $("#pizzaSelectionForm"),
 	fillingForm = $("#fillingForm"),
 	addressForm = $("#addressForm"),
+	clientName = addressForm.find("input[name=client_name]"),
+	clientNumber = addressForm.find("input[name=client_number]"),
+	clientLocation = addressForm.find("input[name=client_location]"),
 	showResult = $("#showResult")
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
@@ -96,22 +99,15 @@ let buttonGroup = $(".button_group"),
 	//Открытие вкладки и отправка данных форм на сервер
 	addressForm.on("submit", function(event) {
 		event.preventDefault();
-		console.log($(this).serialize());
-	});
-		// function sendAjaxForm(showResult, ajax_form, url) {
-			// $.ajax({
-				// url:	ajax_form.php,
-				// type:	"POST",
-				// dataType:	"html",
-				// data: $("#" + ajax_form).serialize(),
-				// success: function(response) {
-					// result = $.parseJSON(response);
-					// showResult.html("Спасибо, заказ принят!");
-				// },
-				// error: function(response) {
-					// showResult.html("Ошибка. Данные не отправлены.");
-				// }
-			// })
-		// };
-
+		
+		let clientNameValue = clientName.val();
+		console.log(clientNameValue);
+		window.sessionStorage.client_name = clientNameValue;
+		let clientNumberValue = clientNumber.val();
+		window.sessionStorage.client_number = clientNumberValue;
+		let clientLocationValue = clientLocation.val();
+		window.sessionStorage.client_location = clientLocationValue;
+		})
+		
+		
 });
