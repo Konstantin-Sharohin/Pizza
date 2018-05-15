@@ -30,15 +30,6 @@ header {
 	cursor: pointer;
 }
 
-.row-flex {
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.info {
-	padding-top: 10%;
-}
-
 .menu {
     background-color: #f1f1f1;
     padding: 20px;
@@ -127,11 +118,6 @@ header {
 	top: 1px;
 	box-shadow: none;
 	outline: none;
-}
-
-section {
-    background-color: #ffffff;
-    padding: 20px;
 }
 
 #pizza {

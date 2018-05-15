@@ -7,9 +7,15 @@ let buttonGroup = $(".button_group"),
 	pizzaSelectionForm = $("#pizzaSelectionForm"),
 	fillingForm = $("#fillingForm"),
 	addressForm = $("#addressForm"),
-	clientName = addressForm.find("input[name=client_name]"),
-	clientNumber = addressForm.find("input[name=client_number]"),
-	clientLocation = addressForm.find("input[name=client_location]"),
+	clientName = $("input[name=client_name]"),
+	clientNumber = $("input[name=client_number]"),
+	clientLocation = $("input[name=client_location]"),
+	reviewName = $("#name"),
+	reviewNumber = $("#number"),
+	reviewLocation = $("#location"),
+	clientNameValue = "",
+	clientNumberValue = "",
+	clientLocationValue = "",
 	showResult = $("#showResult")
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
@@ -24,10 +30,12 @@ let buttonGroup = $(".button_group"),
 	pizzaSizePrices["medium"] = 65,
 	pizzaSizePrices["big"] = 80;
 	
-	//
+	
+	//Скрытие элементов
 	hideElem.hide();
 	bonusImg.hide();
 	submitButton.prop("disabled", true);
+	
 	
 	//Создание обработчика событий для обтекающего элемента и присваивание цен
 	pizzaSelectionForm.on("click", function(event) {
@@ -51,15 +59,17 @@ let buttonGroup = $(".button_group"),
 						submitButton.prop("disabled", false);
 					}
 		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+		event.stopPropagation();
 	});		
 	
-	
+	//Присваивание цен добавкам
 	fillingForm.on("click", function(event) {
 		let pizzaFillingPrice = 0;
 		$("input:checkbox:checked").each(function() {
 			pizzaFillingPrice += parseInt($(this).val());
 			});
 			calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+			event.stopPropagation();
 	});
 	
 	
@@ -93,21 +103,25 @@ let buttonGroup = $(".button_group"),
 		if (pizzaPrice < 120) {
 			bonusImg.hide("slow");
 		}
-	}
+	};
 	
 	
-	//Открытие вкладки и отправка данных форм на сервер
+	//Сбор введенных данных и открытие новой вкладки
 	addressForm.on("submit", function(event) {
 		event.preventDefault();
 		
-		let clientNameValue = clientName.val();
-		console.log(clientNameValue);
-		window.sessionStorage.client_name = clientNameValue;
-		let clientNumberValue = clientNumber.val();
-		window.sessionStorage.client_number = clientNumberValue;
-		let clientLocationValue = clientLocation.val();
-		window.sessionStorage.client_location = clientLocationValue;
-		})
+		clientNameValue = clientName.val();
+		clientNumberValue = clientNumber.val();
+		clientLocationValue = clientLocation.val();
 		
+		window.sessionStorage.setItem("client_name", clientNameValue);
+		window.sessionStorage.setItem("client_number", clientNumberValue);
+		window.sessionStorage.setItem("client_location", clientLocationValue);
+		
+		submitButton.prop("disabled", true);
+		resetButton.prop("disabled", true);
+		
+		window.open("review.html", "Проверка заказа", "width = 700, height = 500");
+		});
 		
 });
