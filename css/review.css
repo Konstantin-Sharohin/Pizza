@@ -23,7 +23,7 @@ header {
 	background-position: top;
     background-repeat: no-repeat;
 }
-
+ 
 footer {
 	padding: 20px;
 	text-align: center;
@@ -34,12 +34,26 @@ footer {
     background-repeat: no-repeat;
 }
 	
-.contacts1 {
+.contact {
 	font-size: 1.2em;
 	color: #2b61ad;
 }
 
-.contacts2 {
+.order {
+	font-size: 1.2em;
+	color: #2b61ad;
+}
+
+.contactDetails {
 	font-size: 1.2em;
 	color: #9b6906;
+}
+
+.orderDetails {
+	font-size: 1.2em;
+	color: #ffffff;
+}
+
+li:nth-of-type(n + 4) {
+	background-color: #f7a71d;
 }

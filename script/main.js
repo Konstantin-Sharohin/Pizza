@@ -10,16 +10,18 @@ let buttonGroup = $(".button_group"),
 	clientName = $("input[name=client_name]"),
 	clientNumber = $("input[name=client_number]"),
 	clientLocation = $("input[name=client_location]"),
-	reviewName = $("#name"),
-	reviewNumber = $("#number"),
-	reviewLocation = $("#location"),
+	smallButton = $("#small"),
+	mediumButton = $("#medium"),
+	bigButton = $("#big").html(),
+	pizzaButton = "",
 	clientNameValue = "",
 	clientNumberValue = "",
 	clientLocationValue = "",
-	showResult = $("#showResult")
+	showResult = $("#showResult"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
+	doubleFilling = $(".doubleFil"),
 	pizzaFillingPrice = 0,
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
@@ -39,24 +41,29 @@ let buttonGroup = $(".button_group"),
 	
 	//Создание обработчика событий для обтекающего элемента и присваивание цен
 	pizzaSelectionForm.on("click", function(event) {
-		let selectedButton = event.target.id; 
+		let selectedButton = event.target.id,
+			notDoubleFil = $(".hide:not(.doubleFil)");
+			
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
 				pizzaSizePrice = pizzaSizePrices.small;
-				hideElem.show("fast");
+				notDoubleFil.show("fast");
 				submitButton.prop("disabled", false);
+				pizzaButton = smallButton.html();
 			}
 				if (selectedButton == "medium") {
 					pizzaImg.animate({"width": "70px", "transitionDuration": "0.7s"});
 					pizzaSizePrice = pizzaSizePrices.medium;
-					hideElem.show("fast");
+					notDoubleFil.show("fast");
 					submitButton.prop("disabled", false);
+					pizzaButton = mediumButton.html();
 				}
 					if (selectedButton == "big") {
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
 						pizzaSizePrice = pizzaSizePrices.big;
-						hideElem.show("fast");
+						notDoubleFil.show("fast");
 						submitButton.prop("disabled", false);
+						pizzaButton = bigButton.html();
 					}
 		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 		event.stopPropagation();
@@ -64,9 +71,13 @@ let buttonGroup = $(".button_group"),
 	
 	//Присваивание цен добавкам
 	fillingForm.on("click", function(event) {
-		let pizzaFillingPrice = 0;
-		$("input:checkbox:checked").each(function() {
-			pizzaFillingPrice += parseInt($(this).val());
+		let pizzaFillingPrice = 0,
+			checked = $("input:checkbox:checked");
+			
+			checked.each(function() {
+				let thisClass = $(this).attr("class");
+				show("fast");
+				pizzaFillingPrice += parseInt($(this).val());
 			});
 			calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 			event.stopPropagation();
@@ -117,11 +128,12 @@ let buttonGroup = $(".button_group"),
 		window.sessionStorage.setItem("client_name", clientNameValue);
 		window.sessionStorage.setItem("client_number", clientNumberValue);
 		window.sessionStorage.setItem("client_location", clientLocationValue);
+		window.sessionStorage.setItem("pizza_size", pizzaButton);
 		
 		submitButton.prop("disabled", true);
 		resetButton.prop("disabled", true);
 		
-		window.open("review.html", "Проверка заказа", "width = 700, height = 500");
+		let newWindow = window.open("review.html", "Проверка заказа", "width = 700, height = 500");
 		});
 		
 });

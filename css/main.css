@@ -180,6 +180,11 @@ header {
     transform: rotate(45deg);
 }
 
+.doubleFil {
+	font-size: 1.2em;
+	color: #f45642;
+}
+
 #bonus {
 	width: 30px;
 }
