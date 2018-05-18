@@ -183,6 +183,10 @@ header {
 .doubleFil {
 	font-size: 1.2em;
 	color: #f45642;
+	overflow: visible;
+	margin-top: -23px;
+	margin-left: 90px;
+	padding-left: 20px;
 }
 
 #bonus {

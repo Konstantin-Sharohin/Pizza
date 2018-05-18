@@ -12,15 +12,17 @@ let buttonGroup = $(".button_group"),
 	clientLocation = $("input[name=client_location]"),
 	smallButton = $("#small"),
 	mediumButton = $("#medium"),
-	bigButton = $("#big").html(),
-	pizzaButton = "",
+	bigButton = $("#big"),
+	pizzaButtonValue = "",
 	clientNameValue = "",
 	clientNumberValue = "",
 	clientLocationValue = "",
+	pizzaFillingsValue = [],
 	showResult = $("#showResult"),
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
+	ingredients = $(".ingredients"),
 	doubleFilling = $(".doubleFil"),
 	pizzaFillingPrice = 0,
 	fillingLenght = pizzaFillings.length,
@@ -41,62 +43,62 @@ let buttonGroup = $(".button_group"),
 	
 	//Создание обработчика событий для обтекающего элемента и присваивание цен
 	pizzaSelectionForm.on("click", function(event) {
-		let selectedButton = event.target.id,
-			notDoubleFil = $(".hide:not(.doubleFil)");
-			
+		let selectedButton = event.target.id;
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
 				pizzaSizePrice = pizzaSizePrices.small;
-				notDoubleFil.show("fast");
+				hideElem.show("fast");
 				submitButton.prop("disabled", false);
-				pizzaButton = smallButton.html();
+				pizzaButtonValue = smallButton.html();
 			}
 				if (selectedButton == "medium") {
 					pizzaImg.animate({"width": "70px", "transitionDuration": "0.7s"});
 					pizzaSizePrice = pizzaSizePrices.medium;
-					notDoubleFil.show("fast");
+					hideElem.show("fast");
 					submitButton.prop("disabled", false);
-					pizzaButton = mediumButton.html();
+					pizzaButtonValue = mediumButton.html();
 				}
 					if (selectedButton == "big") {
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
 						pizzaSizePrice = pizzaSizePrices.big;
-						notDoubleFil.show("fast");
+						hideElem.show("fast");
 						submitButton.prop("disabled", false);
-						pizzaButton = bigButton.html();
+						pizzaButtonValue = bigButton.html();
 					}
+		doubleFilling.hide();
 		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 		event.stopPropagation();
 	});		
 	
-	//Присваивание цен добавкам
+	//Двойная порция добавок и присваивание им цен
 	fillingForm.on("click", function(event) {
 		let pizzaFillingPrice = 0,
-			checked = $("input:checkbox:checked");
-			
-			checked.each(function() {
-				let thisClass = $(this).attr("class");
-				show("fast");
-				pizzaFillingPrice += parseInt($(this).val());
-			});
-			calculateTotal(pizzaSizePrice, pizzaFillingPrice);
-			event.stopPropagation();
+			checkedPizzaFillings = $("input:checkbox:checked");
+		
+		$(event.target).find(".doubleFil").show();
+		
+		checkedPizzaFillings.each(function() {
+			pizzaFillingPrice += parseInt($(this).val());
+		});
+		
+		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
+		event.stopPropagation();
 	});
-	
+
 	
 	//Сброс выбора пиццы
 	resetButton.on("click", function(event) {
-			let selectedButton = event.target.id;
-			if (selectedButton == "reset") {
-				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
-				pizzaSizePrice = 0;
-				pizzaFillingPrice = 0;
-				for (let i = 0; i < fillingLenght; i++) {
-					pizzaFillings.prop("checked", false);
-				}
-				hideElem.hide("slow");
-				submitButton.prop("disabled", true);
+		let selectedButton = event.target.id;
+		if (selectedButton == "reset") {
+			pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
+			pizzaSizePrice = 0;
+			pizzaFillingPrice = 0;
+			for (let i = 0; i < fillingLenght; i++) {
+				pizzaFillings.prop("checked", false);
 			}
+			hideElem.hide("slow");
+			submitButton.prop("disabled", true);
+		}
 		event.stopPropagation();
 		});
 	
@@ -128,7 +130,8 @@ let buttonGroup = $(".button_group"),
 		window.sessionStorage.setItem("client_name", clientNameValue);
 		window.sessionStorage.setItem("client_number", clientNumberValue);
 		window.sessionStorage.setItem("client_location", clientLocationValue);
-		window.sessionStorage.setItem("pizza_size", pizzaButton);
+		window.sessionStorage.setItem("pizza_size", pizzaButtonValue);
+		window.sessionStorage.setItem("pizza_fillings", checkedPizzaFillings);
 		
 		submitButton.prop("disabled", true);
 		resetButton.prop("disabled", true);
