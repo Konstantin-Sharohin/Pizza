@@ -18,12 +18,10 @@ let buttonGroup = $(".button_group"),
 	clientNumberValue = "",
 	clientLocationValue = "",
 	pizzaFillingsValue = [],
-	showResult = $("#showResult"),
+	pizzaCost = "",
 	submitButton = $("#button"),
 	resetButton = $("#reset"),
 	pizzaFillings = $("input:checkbox"),
-	ingredients = $(".ingredients"),
-	doubleFilling = $(".doubleFil"),
 	pizzaFillingPrice = 0,
 	fillingLenght = pizzaFillings.length,
 	totalCost = $("#totalPrice"),
@@ -47,40 +45,44 @@ let buttonGroup = $(".button_group"),
 			if (selectedButton == "small") {
 				pizzaImg.animate({"width": "50px", "transitionDuration": "0.7s"});
 				pizzaSizePrice = pizzaSizePrices.small;
-				hideElem.show("fast");
 				submitButton.prop("disabled", false);
-				pizzaButtonValue = smallButton.html();
+				pizzaButtonValue = smallButton.text().slice(1, 6);
+				hideElem.show("fast");
 			}
 				if (selectedButton == "medium") {
 					pizzaImg.animate({"width": "70px", "transitionDuration": "0.7s"});
 					pizzaSizePrice = pizzaSizePrices.medium;
-					hideElem.show("fast");
 					submitButton.prop("disabled", false);
-					pizzaButtonValue = mediumButton.html();
+					pizzaButtonValue = mediumButton.text().slice(1, 6);
+					hideElem.show("fast");
 				}
 					if (selectedButton == "big") {
 						pizzaImg.animate({"width": "90px", "transitionDuration": "0.7s"});
 						pizzaSizePrice = pizzaSizePrices.big;
-						hideElem.show("fast");
 						submitButton.prop("disabled", false);
-						pizzaButtonValue = bigButton.html();
-					}
-		doubleFilling.hide();
+						pizzaButtonValue = bigButton.text().slice(1, 6);
+						hideElem.show("fast");
+					}	
+					
 		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 		event.stopPropagation();
 	});		
 	
-	//Двойная порция добавок и присваивание им цен
+	
+	//Присваивание цен добавкам
 	fillingForm.on("click", function(event) {
 		let pizzaFillingPrice = 0,
-			checkedPizzaFillings = $("input:checkbox:checked");
-		
-		$(event.target).find(".doubleFil").show();
+			checkedPizzaFillings = $("input:checkbox:checked"),
+			str = "";
+			
+		pizzaFillingsValue.length = 0;
 		
 		checkedPizzaFillings.each(function() {
 			pizzaFillingPrice += parseInt($(this).val());
+			str = $(this).closest("label").text();
+			pizzaFillingsValue.push(str);
 		});
-		
+
 		calculateTotal(pizzaSizePrice, pizzaFillingPrice);
 		event.stopPropagation();
 	});
@@ -99,6 +101,7 @@ let buttonGroup = $(".button_group"),
 			hideElem.hide("slow");
 			submitButton.prop("disabled", true);
 		}
+		
 		event.stopPropagation();
 		});
 	
@@ -116,6 +119,7 @@ let buttonGroup = $(".button_group"),
 		if (pizzaPrice < 120) {
 			bonusImg.hide("slow");
 		}
+		pizzaCost = pizzaPrice;
 	};
 	
 	
@@ -131,7 +135,8 @@ let buttonGroup = $(".button_group"),
 		window.sessionStorage.setItem("client_number", clientNumberValue);
 		window.sessionStorage.setItem("client_location", clientLocationValue);
 		window.sessionStorage.setItem("pizza_size", pizzaButtonValue);
-		window.sessionStorage.setItem("pizza_fillings", checkedPizzaFillings);
+		window.sessionStorage.setItem("pizza_fillings", pizzaFillingsValue.join(", "));
+		window.sessionStorage.setItem("pizza_cost", pizzaCost);
 		
 		submitButton.prop("disabled", true);
 		resetButton.prop("disabled", true);
@@ -139,4 +144,5 @@ let buttonGroup = $(".button_group"),
 		let newWindow = window.open("review.html", "Проверка заказа", "width = 700, height = 500");
 		});
 		
+		event.stopPropagation();
 });

@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/review.css">
 		<link rel="stylesheet" href="css/bootStrap4.css">
+		<link rel="stylesheet" href="css/jquery.ui.timepicker.css">
+		<link rel="stylesheet" href="css/jquery-ui.theme.css">
     </head>
     <body>
 	<div class="container-fluid">
@@ -19,10 +21,13 @@
 					<li class="list-group-item list-group-item-primary"><span class="contact">Номер телефона: </span><span class="contactDetails" id="number"></span></li>
 					<li class="list-group-item list-group-item-primary"><span class="contact">Адрес доставки: </span><span class="contactDetails" id="location"></span></li>
 					<li class="list-group-item list-group-item-success"><span class="order">Размер пиццы: </span><span class="orderDetails" id="size"></span></li>
-					<li class="list-group-item list-group-item-success"><span class="order">Добавки: </span><span class="orderDetails" id="fillings"></span></li>
+					<li class="list-group-item list-group-item-success" id="fillingsBox"><span class="order">Добавки: </span><span class="orderDetails" id="fillings"></span></li>
+					<li class="list-group-item list-group-item-success" id="cost"><span class="order">Итого: </span><span class="orderDetails" id="pizzaCost"></span></li>
 					<li class="list-group-item list-group-item-success"><span class="order"></span><span class="orderDetails" id=""></span></li>
-					<li class="list-group-item list-group-item-success"><span class="order"></span><span class="orderDetails" id=""></span></li>
-					<li class="list-group-item list-group-item-success"><span class="order"></span><span class="orderDetails" id=""></span></li>
+					<div>
+						<label for="timepicker">Выберите время доставки: </label>
+						<input type="text" id="timepicker" value="" class="hasTimepicker">
+					</div>
 				</ul>
 			</div>
 		</div>
@@ -32,9 +37,14 @@
 		</footer>
 
 		<script src="script/jQ_3.js"></script>
+		<script src="script/jquery-ui.min.js"></script>
+		<script src="script/jquery.ui.core.min.js"></script>
+		<script src="script/jquery.ui.position.min.js"></script>
+		<script src="script/jquery.ui.tabs.min.js"></script>
+		<script src="script/jquery.ui.widget.min.js"></script>
+		<script src="script/jquery.ui.timepicker.js"></script>
 		<script src="script/bootstrap4_JS.js"></script>
 		<script src="script/review.js"></script>
-		
 	</div>	
     </body>
 </html>

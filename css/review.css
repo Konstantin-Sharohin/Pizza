@@ -34,6 +34,14 @@ footer {
     background-repeat: no-repeat;
 }
 	
+#cost {
+	background-color: rgb(124, 219, 72);
+}
+	
+#pizzaCost {
+	font-size: 1.5em;
+}
+	
 .contact {
 	font-size: 1.2em;
 	color: #2b61ad;
