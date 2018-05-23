@@ -80,6 +80,7 @@ let buttonGroup = $(".button_group"),
 		checkedPizzaFillings.each(function() {
 			pizzaFillingPrice += parseInt($(this).val());
 			str = $(this).closest("label").text();
+			str.slice(0, -4);
 			pizzaFillingsValue.push(str);
 		});
 
