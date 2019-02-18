@@ -78,9 +78,9 @@ let buttonGroup = $(".button_group"),
 		pizzaFillingsValue.length = 0;
 		
 		checkedPizzaFillings.each(function() {
-			pizzaFillingPrice += parseInt($(this).val());
-			str = $(this).closest("label").text();
-			str.slice(0, -4);
+			let that = $(this);
+			pizzaFillingPrice += parseInt(that.val());
+			str = that.closest("label").text().slice(0, 7);
 			pizzaFillingsValue.push(str);
 		});
 
